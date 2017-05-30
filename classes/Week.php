@@ -38,7 +38,7 @@ class Week{
   }
 
   public function get_date_posted($id){
-    $this->id = $id;
+    $this->id = $id + 1;
     $result   = $this->get_date_posted_result();
     return $this->get_date($result);
   }
