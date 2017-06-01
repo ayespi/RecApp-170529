@@ -40,6 +40,32 @@ class Team{
     return $this->data;
   }
 
+  public function get_team($team_id){
+    $this->id = $team_id;
+    $sql      = $this->get_team_query();
+    $result   = mysqli_query($this->connection, $sql);
+    return $this->get_team_data($result);
+  }
+
+  public function get_team_query(){
+    return $sql = "SELECT * FROM teams
+    WHERE team_id='$this->id';";
+  }
+
+  public function get_team_data($result){
+    $this->data = array();
+    while($row = mysqli_fetch_assoc($result)){
+      $this->data[] = array(
+        'id'            =>      $row['team_id'],
+        'name'          =>      $row['team_name'],
+        'leader'        =>      $row['team_leader'],
+        'date_entered'  =>      $row['team_date_entered']
+      );
+    }
+    $this->json = json_encode($this->data);
+    return $this->data;
+  }
+
   public function get_team_leader($team_id){
 
   }
